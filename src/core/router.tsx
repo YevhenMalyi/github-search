@@ -2,7 +2,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom';
 
-import { FavoritesPage, SearchPage } from '../pages';
+import { FavoritesPage, SearchPage } from '@pages';
 
 export const router = createBrowserRouter([
   {
