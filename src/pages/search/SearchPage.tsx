@@ -1,5 +1,7 @@
+import { SearchField } from 'features/search';
+
 export const SearchPage = () => {
   return (
-    <div>Search page</div>
+    <SearchField />
   );
 };
