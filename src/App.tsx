@@ -3,7 +3,7 @@ import { ApolloProvider } from '@apollo/client';
 
 import { Navigation } from 'layout';
 import { FavoritesPage, SearchPage } from 'pages';
-import { apolloClient } from 'core/apollo-config';
+import { apolloClient } from 'core/configs/apollo-config';
 
 import './styles.css';
 
