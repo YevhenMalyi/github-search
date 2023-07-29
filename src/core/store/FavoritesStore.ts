@@ -18,19 +18,19 @@ const initialState: State = {
   favorites: new Map(),
 };
 
-export const useFavoritesStore = create<State>(() => ({
+export const useStore = create<State>(() => ({
   ...initialState,
 }))
 
-export const FavoritesStoreActions = {
+export const StoreActions = {
   [ActionTypes.SET]: (id: number, rating: number) => {
-    useFavoritesStore.setState(({ favorites }: State) => ({
+    useStore.setState(({ favorites }: State) => ({
       favorites: new Map(favorites).set(id, rating),
     }));
   },
 
   [ActionTypes.REMOVE]: (id: number) => {
-    useFavoritesStore.setState(({ favorites }: State) => {
+    useStore.setState(({ favorites }: State) => {
       let updated = new Map(favorites);
       updated.delete(id);
       return {
