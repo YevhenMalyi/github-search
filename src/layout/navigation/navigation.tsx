@@ -1,21 +1,31 @@
-import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export const Navigation = () => {
-  const [value, setValue] = useState(0);
+  const location = useLocation();
   
   return (
-    <BottomNavigation
+    <BottomNavigation 
       showLabels
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
+      value={ location.pathname }
     >
-      <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-      <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+      <BottomNavigationAction 
+        component={Link}
+        label="Search"
+        value="/"
+        to="/"
+        icon={ <SearchIcon /> } 
+      />
+
+      <BottomNavigationAction 
+        component={Link}
+        label="Favorites" 
+        value="/favorites"
+        to="/favorites"
+        icon={ <FavoriteIcon /> } 
+      />
     </BottomNavigation>
   );
 };

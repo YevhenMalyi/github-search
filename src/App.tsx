@@ -1,15 +1,23 @@
-import { RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 
 import { Navigation } from 'layout';
-import { router } from 'core/router';
+import { FavoritesPage, SearchPage } from 'pages';
 import { apolloClient } from 'core/apollo-config';
+
+import './styles.css';
 
 export const App = () => {
   return (
     <ApolloProvider client={ apolloClient }>
-      <Navigation />
-      <RouterProvider router={ router } />
+      <BrowserRouter>
+        <Navigation />
+        
+        <Routes>
+          <Route path="/" element={<SearchPage />} />
+          <Route path=":id" element={<FavoritesPage />} />
+        </Routes>
+      </BrowserRouter>
     </ApolloProvider>
   );
 };
