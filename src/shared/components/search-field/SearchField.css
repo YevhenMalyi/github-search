@@ -4,11 +4,12 @@
   gap: 1rem;
 }
 
-.app-search-input {
+.app-search-field__input {
   width: 100%;
+  background-color: #FFFFFF;
 }
 
-.app-search-button {
+.app-search-field__button {
   height: 56px;
   width: 56px;
 }

@@ -22,13 +22,13 @@ export const SearchField = (
   return (
     <div className="app-search-field">
       <TextField 
-        className="app-search-input" 
+        className="app-search-field__input" 
         label="Search field" 
         type="search" 
         onChange={ handleInputChange }
       />
 
-      <Button className="app-search-button" variant="contained" onClick={ handleClick }>
+      <Button className="app-search-field__button" variant="contained" onClick={ handleClick }>
         <SearchIcon />
       </Button>
     </div>

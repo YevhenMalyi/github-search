@@ -3,6 +3,8 @@ import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
+import './Navigation.css';
+
 export const Navigation = () => {
   const location = useLocation();
   
@@ -10,6 +12,7 @@ export const Navigation = () => {
     <BottomNavigation 
       showLabels
       value={ location.pathname }
+      className="app-navigation"
     >
       <BottomNavigationAction 
         component={Link}

@@ -6,6 +6,8 @@ import { ISearchRepo, ISearchSchema } from 'features/repository/types';
 import { SearchField } from 'shared/components';
 import { RepositoryListItem } from '../repository-list-item';
 
+import './RepositoryList.css';
+
 export const RepositoryList = () => {
   const [searchString, setSearchString] = useState<string>();
   const [startNextPage, setStartNextPage] = useState<string>();
@@ -30,7 +32,7 @@ export const RepositoryList = () => {
   };
 
   return (
-    <div className="repositories-list">
+    <div className="app-repository-list">
       <SearchField onSearch={ onSearch }/>
 
       { repos?.map(repo => <RepositoryListItem repo={repo} />)}
