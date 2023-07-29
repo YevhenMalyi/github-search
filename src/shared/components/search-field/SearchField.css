@@ -1,0 +1,14 @@
+.app-search-field {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.app-search-input {
+  width: 100%;
+}
+
+.app-search-button {
+  height: 56px;
+  width: 56px;
+}

@@ -1,13 +1,21 @@
-import { TextField } from '@mui/material';
+import { TextField, Button } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+
+import './SearchField.css';
 
 type SearchFieldProps = {
-  onSearch?: Function,
+  onSearch: (event: any) => void,
 };
 
 export const SearchField = (
   { onSearch }: SearchFieldProps
 ) => {
   return (
-    <TextField label="Search field" type="search" />
+    <div className="app-search-field">
+      <TextField className="app-search-input" label="Search field" type="search" />
+      <Button className="app-search-button" variant="contained" onClick={ onSearch }>
+        <SearchIcon />
+      </Button>
+    </div>
   );
 };

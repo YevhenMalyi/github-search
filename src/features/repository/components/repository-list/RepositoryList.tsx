@@ -1,7 +1,13 @@
+import { SearchField } from 'shared/components';
+
 export const RepositoryList = () => {
-  fetch('https://api.github.com/graphql', {});
+  const onSearch = (event: Event) => {
+    console.log(event);
+  };
 
   return (
-    <span>Repository List</span>
+    <div className="repositories-list">
+      <SearchField onSearch={ onSearch }/>
+    </div>
   );
 };
