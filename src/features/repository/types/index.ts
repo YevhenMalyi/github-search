@@ -6,7 +6,7 @@ export interface ISearchPageInfo {
 export interface ISearchRepo {
   id: string,
   name: string,
-  descrption: string,
+  description: string,
   updatedAt: string,
   url: string,
   owner: {
