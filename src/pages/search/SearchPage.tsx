@@ -1,4 +1,4 @@
-import { SearchField } from 'features/search';
+import { SearchField } from 'features/search/components';
 
 export const SearchPage = () => {
   return (
