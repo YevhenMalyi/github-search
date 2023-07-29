@@ -1,5 +1,5 @@
 import { RepositoryList } from 'features/repository/components';
-import { SearchField } from 'features/search/components';
+import { SearchField } from 'shared/components';
 
 export const SearchPage = () => {
   return (
