@@ -1,12 +1,12 @@
 import { ReactElement } from 'react';
 import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
 
-import { ISearchRepo } from 'features/repository/types';
+import { IRepo } from 'features/repository/types';
 
 import './RepositoryListItem.css';
 
 interface IRepositoryListItemProps {
-  repo: ISearchRepo,
+  repo: IRepo,
   additionalActions?: ReactElement,
 }
 

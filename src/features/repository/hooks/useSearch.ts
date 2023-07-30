@@ -1,13 +1,13 @@
 import { useQuery } from '@apollo/client';
 import { useMemo, useState } from 'react';
-import { ISearchRepo, ISearchSchema } from '../types';
+import { IRepo, ISearchSchema } from '../types';
 import { GET_SEARCHED_REPOS } from '../schemas';
 
 export const useSearch = () => {
-  const [searchString, setSearchString] = useState<string>();
+  const [searchString, setSearchString] = useState<string>('');
   const [startNextPage, setStartNextPage] = useState<string>();
   
-  const { data } = useQuery<ISearchSchema>(GET_SEARCHED_REPOS, {
+  const { data, loading } = useQuery<ISearchSchema>(GET_SEARCHED_REPOS, {
     variables: {
       query: searchString,
       before: startNextPage,
@@ -17,7 +17,7 @@ export const useSearch = () => {
   const hasNextPage = useMemo(() => data?.search.pageInfo.hasNextPage, [data]);
   const endCursor = useMemo(() => data?.search.pageInfo.endCursor, [data]);
   const repos = useMemo(() => data?.search.repos.map(
-    ({repo}): ISearchRepo => repo), [data]
+    ({repo}): IRepo => repo), [data]
   );
 
   const onSearch = (search: string) => {
@@ -27,5 +27,8 @@ export const useSearch = () => {
   return {
     repos,
     onSearch,
+    isLoading: searchString.length && loading,
+    isSearchEmpty: searchString.length === 0,
+    isNoResults: searchString.length && !loading && repos && repos.length === 0
   };
 };

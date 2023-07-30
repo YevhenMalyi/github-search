@@ -1,16 +1,16 @@
-import { ActionTypes, StoreActions, useStore } from 'core/store/FavoritesStore';
-import { ISearchRepo } from '../types';
+import { ActionTypes, StoreActions, useStore } from 'core/store';
+import { IRepo } from '../types';
 
 export const useFavorites = () => {
   const { favorites } = useStore();
 
-  const isFavorite = (repo: ISearchRepo) => !!favorites.find(favorite => favorite.id === repo.id);
+  const isFavorite = (repo: IRepo) => !!favorites.find(favorite => favorite.id === repo.id);
 
-  const handleFavoritesClick = (repo: ISearchRepo) => isFavorite(repo)
+  const handleFavoritesClick = (repo: IRepo) => isFavorite(repo)
     ? StoreActions[ActionTypes.REMOVE](repo)
     : StoreActions[ActionTypes.ADD](repo);
 
-  const setRating = (repo: ISearchRepo, value: number | null) => {
+  const setRating = (repo: IRepo, value: number | null) => {
     StoreActions[ActionTypes.SET_RATING](repo, value);
   };
 

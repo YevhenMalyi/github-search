@@ -1,4 +1,4 @@
-import { ISearchRepo } from 'features/repository/types';
+import { IRepo } from 'features/repository/types';
 import { create } from 'zustand';
 
 export enum ActionTypes {
@@ -8,7 +8,7 @@ export enum ActionTypes {
 };
 
 type State = {
-  favorites: ISearchRepo[],
+  favorites: IRepo[],
 };
 
 const initialState: State = {
@@ -20,7 +20,7 @@ export const useStore = create<State>(() => ({
 }))
 
 export const StoreActions = {
-  [ActionTypes.ADD]: (repo: ISearchRepo) => {
+  [ActionTypes.ADD]: (repo: IRepo) => {
     useStore.setState(({ favorites }: State) => { 
       return favorites.find(favorite => repo.id === favorite.id)
         ? {}
@@ -28,7 +28,7 @@ export const StoreActions = {
     });
   },
 
-  [ActionTypes.SET_RATING]: (repo: ISearchRepo, rating: number | null) => {
+  [ActionTypes.SET_RATING]: (repo: IRepo, rating: number | null) => {
     useStore.setState(({ favorites }: State) => {
       return { 
         favorites: favorites.map(favorite => 
@@ -40,7 +40,7 @@ export const StoreActions = {
     });
   },
 
-  [ActionTypes.REMOVE]: (repo: ISearchRepo) => {
+  [ActionTypes.REMOVE]: (repo: IRepo) => {
     useStore.setState(({ favorites }: State) => { 
       return { favorites: favorites.filter(favorite => favorite.id !== repo.id) };
     });

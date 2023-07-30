@@ -7,26 +7,33 @@ import './FavoritesList.css';
 export const FavoritesList = () => {
   const { favorites, handleFavoritesClick, isFavorite, setRating } = useFavorites();
 
+  const getList = () => {
+    return favorites.map(repo => 
+      <RepositoryListItem 
+        repo={ repo } 
+        key={ repo.id } 
+        additionalActions={
+          <div className="d-flex align-center">
+            <CustomRating 
+              rating={ repo.rating || null }
+              setRating={ (value) => setRating(repo, value) }
+            />
+
+            <FavoriteButton 
+              isFavorite={ isFavorite(repo) }
+              handleClick={ () => handleFavoritesClick(repo) }
+            />
+          </div>
+        }
+      />
+    );
+  };
+
   return (
     <div className="app-repository-list">
-      { favorites.map(repo => 
-        <RepositoryListItem 
-          repo={ repo } 
-          key={ repo.id } 
-          additionalActions={
-            <div className="d-flex align-center">
-              <CustomRating 
-                rating={ repo.rating || null }
-                setRating={ (value) => setRating(repo, value) }
-              />
-
-              <FavoriteButton 
-                isFavorite={ isFavorite(repo) }
-                handleClick={ () => handleFavoritesClick(repo) }
-              />
-            </div>
-          }
-        />)
+      { favorites.length 
+        ? getList()
+        : <h2>Your list of favorite repositories is empty</h2>
       }
     </div>
   );

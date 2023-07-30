@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { TextField, Button } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { TextField } from '@mui/material';
+import { debounce } from '@mui/material/utils';
 
 import './SearchField.css';
 
@@ -11,26 +10,14 @@ type SearchFieldProps = {
 export const SearchField = (
   { onSearch }: SearchFieldProps
 ) => {
-  const [search, setSearch] = useState('');
-
-  const handleClick = () => onSearch(search);
-
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => setSearch(event.target.value);
-
   return (
     <div className="app-search-field">
       <TextField 
         className="app-search-field__input" 
         label="Search field" 
         type="search" 
-        onChange={ handleInputChange }
+        onChange={ debounce((event) => onSearch(event.target.value), 1000) }
       />
-
-      <Button className="app-search-field__button" variant="contained" onClick={ handleClick }>
-        <SearchIcon />
-      </Button>
     </div>
   );
 };

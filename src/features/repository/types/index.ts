@@ -3,7 +3,7 @@ export interface ISearchPageInfo {
   endCursor: string,
 };
 
-export interface ISearchRepo {
+export interface IRepo {
   id: string,
   name: string,
   description: string,
@@ -20,7 +20,7 @@ export interface ISearchSchema {
     pageInfo: ISearchPageInfo,
     repositoryCount: number,
     repos: {
-      repo: ISearchRepo
+      repo: IRepo
     }[],
   }
 };
