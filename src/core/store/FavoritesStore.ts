@@ -28,13 +28,17 @@ export const StoreActions = {
     });
   },
 
-  // [ActionTypes.SET_RATING]: (id: string, rating: number) => {
-  //   useStore.setState(({ favorites }: State) => {
-  //     const item = favorites.find(favorite => favorite.id === id);
-  //     return item 
-  //       ? 
-  //   });
-  // },
+  [ActionTypes.SET_RATING]: (repo: ISearchRepo, rating: number | null) => {
+    useStore.setState(({ favorites }: State) => {
+      return { 
+        favorites: favorites.map(favorite => 
+          favorite.id === repo.id 
+            ? { ...favorite, rating } 
+            : favorite
+        ),
+      };
+    });
+  },
 
   [ActionTypes.REMOVE]: (repo: ISearchRepo) => {
     useStore.setState(({ favorites }: State) => { 

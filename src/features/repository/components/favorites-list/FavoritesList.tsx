@@ -1,11 +1,11 @@
 import { useFavorites } from 'features/repository/hooks';
 import { RepositoryListItem } from '../repository-list-item';
-import { FavoriteButton } from 'shared/components';
+import { FavoriteButton, CustomRating } from 'shared/components';
 
 import './FavoritesList.css';
 
 export const FavoritesList = () => {
-  const { favorites, handleFavoritesClick, isFavorite } = useFavorites();
+  const { favorites, handleFavoritesClick, isFavorite, setRating } = useFavorites();
 
   return (
     <div className="app-repository-list">
@@ -14,10 +14,17 @@ export const FavoritesList = () => {
           repo={ repo } 
           key={ repo.id } 
           additionalActions={
-            <FavoriteButton 
-              isFavorite={ isFavorite(repo) }
-              handleClick={ () => handleFavoritesClick(repo) }
-            />
+            <div className="d-flex align-center">
+              <CustomRating 
+                rating={ repo.rating || null }
+                setRating={ (value) => setRating(repo, value) }
+              />
+
+              <FavoriteButton 
+                isFavorite={ isFavorite(repo) }
+                handleClick={ () => handleFavoritesClick(repo) }
+              />
+            </div>
           }
         />)
       }

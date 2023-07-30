@@ -10,9 +10,14 @@ export const useFavorites = () => {
     ? StoreActions[ActionTypes.REMOVE](repo)
     : StoreActions[ActionTypes.ADD](repo);
 
+  const setRating = (repo: ISearchRepo, value: number | null) => {
+    StoreActions[ActionTypes.SET_RATING](repo, value);
+  };
+
   return {
     favorites,
     isFavorite,
     handleFavoritesClick,
+    setRating,
   }
 };

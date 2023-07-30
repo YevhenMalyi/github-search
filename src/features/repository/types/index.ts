@@ -11,7 +11,8 @@ export interface ISearchRepo {
   url: string,
   owner: {
     login: string,
-  }
+  },
+  rating?: number | null,
 };
 
 export interface ISearchSchema {
