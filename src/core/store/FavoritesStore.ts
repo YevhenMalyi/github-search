@@ -1,21 +1,18 @@
+import { ISearchRepo } from 'features/repository/types';
 import { create } from 'zustand';
 
 export enum ActionTypes {
-  SET = 'favorites/set',
+  ADD = 'favorites/add',
+  SET_RATING = 'favorites/set_rating',
   REMOVE = 'favorites/remove',
 };
 
-// type Actions = {
-//   [ActionTypes.SET]: (id: number, rating: number) => void,
-//   [ActionTypes.REMOVE]: (id: number) => void,
-// };
-
 type State = {
-  favorites: Map<number, number>,
+  favorites: ISearchRepo[],
 };
 
 const initialState: State = {
-  favorites: new Map(),
+  favorites: [],
 };
 
 export const useStore = create<State>(() => ({
@@ -23,19 +20,25 @@ export const useStore = create<State>(() => ({
 }))
 
 export const StoreActions = {
-  [ActionTypes.SET]: (id: number, rating: number) => {
-    useStore.setState(({ favorites }: State) => ({
-      favorites: new Map(favorites).set(id, rating),
-    }));
+  [ActionTypes.ADD]: (repo: ISearchRepo) => {
+    useStore.setState(({ favorites }: State) => { 
+      return favorites.find(favorite => repo.id === favorite.id)
+        ? {}
+        : { favorites: [...favorites, repo] };
+    });
   },
 
-  [ActionTypes.REMOVE]: (id: number) => {
-    useStore.setState(({ favorites }: State) => {
-      let updated = new Map(favorites);
-      updated.delete(id);
-      return {
-        favorites: updated,
-      };
+  // [ActionTypes.SET_RATING]: (id: string, rating: number) => {
+  //   useStore.setState(({ favorites }: State) => {
+  //     const item = favorites.find(favorite => favorite.id === id);
+  //     return item 
+  //       ? 
+  //   });
+  // },
+
+  [ActionTypes.REMOVE]: (repo: ISearchRepo) => {
+    useStore.setState(({ favorites }: State) => { 
+      return { favorites: favorites.filter(favorite => favorite.id !== repo.id) };
     });
   },
 };

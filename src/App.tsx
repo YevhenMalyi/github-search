@@ -5,8 +5,6 @@ import { Navigation } from 'layout';
 import { FavoritesPage, SearchPage } from 'pages';
 import { apolloClient } from 'core/configs/apollo-config';
 
-import './styles.css';
-
 export const App = () => {
   return (
     <ApolloProvider client={ apolloClient }>

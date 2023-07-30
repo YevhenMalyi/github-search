@@ -1,13 +1,18 @@
+import { ReactElement } from 'react';
 import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
+
 import { ISearchRepo } from 'features/repository/types';
+
+import './RepositoryListItem.css';
 
 interface IRepositoryListItemProps {
   repo: ISearchRepo,
+  additionalActions?: ReactElement,
 }
 
-export const RepositoryListItem = ({ repo }: IRepositoryListItemProps) => {
+export const RepositoryListItem = ({ repo, additionalActions }: IRepositoryListItemProps) => {
   return (
-    <Card>
+    <Card className="app-repsitory-list-item">
       <CardContent>
         <Typography variant="h5" component="div">
           { repo.name }
@@ -21,9 +26,13 @@ export const RepositoryListItem = ({ repo }: IRepositoryListItemProps) => {
           { repo.description }
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Open on GitHUB</Button>
-        <Button size="small">Add to Favorites</Button>
+
+      <CardActions className="justify-space-between">
+        <Button size="small" href={ repo.url } target="_blank">
+          Open on GitHUB
+        </Button>
+
+        { additionalActions }
       </CardActions>
     </Card>
   );
