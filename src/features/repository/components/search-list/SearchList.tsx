@@ -1,4 +1,4 @@
-import { CircularProgress } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import { FavoriteButton, SearchField } from 'shared/components';
 import { useFavorites, useSearch } from 'features/repository/hooks';
 import { RepositoryListItem } from '../repository-list-item';
@@ -7,7 +7,15 @@ import './SearchList.css';
 
 export const SearchList = () => {
   const { handleFavoritesClick, isFavorite } = useFavorites();
-  const { onSearch, repos, isLoading, isSearchEmpty, isNoResults } = useSearch();
+  const { 
+    onSearch, 
+    repos, 
+    isLoading, 
+    isSearchEmpty, 
+    isNoResults, 
+    hasNextPage, 
+    loadMore 
+  } = useSearch();
 
   const getList = () => repos?.map(repo => 
     <RepositoryListItem 
@@ -38,8 +46,16 @@ export const SearchList = () => {
     <div className="app-search-list">
       <SearchField onSearch={ onSearch }/>
 
-      { getStatus() }
       { getList() }
+      { (!isLoading && hasNextPage) && 
+        <Button 
+          onClick={ loadMore }
+          sx={{ fontSize: '1.5rem' }}
+        >
+          Load more
+        </Button>
+      }
+      { getStatus() }
     </div>
   );
 };

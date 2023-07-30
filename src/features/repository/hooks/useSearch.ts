@@ -1,34 +1,45 @@
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useMemo, useState } from 'react';
 import { IRepo, ISearchSchema } from '../types';
 import { GET_SEARCHED_REPOS } from '../schemas';
 
 export const useSearch = () => {
   const [searchString, setSearchString] = useState<string>('');
-  const [startNextPage, setStartNextPage] = useState<string>();
+  const [repos, setRepos] = useState<IRepo[]>([]);
   
-  const { data, loading } = useQuery<ISearchSchema>(GET_SEARCHED_REPOS, {
-    variables: {
-      query: searchString,
-      before: startNextPage,
-    }
-  });
+  const [
+    getSearchedRepos, { data, loading }
+  ] = useLazyQuery<ISearchSchema>(GET_SEARCHED_REPOS);
   
   const hasNextPage = useMemo(() => data?.search.pageInfo.hasNextPage, [data]);
   const endCursor = useMemo(() => data?.search.pageInfo.endCursor, [data]);
-  const repos = useMemo(() => data?.search.repos.map(
-    ({repo}): IRepo => repo), [data]
-  );
 
   const onSearch = (search: string) => {
+    setRepos([]);
     setSearchString(search);
+    getSearchedRepos({
+      variables: { query: search },
+    }).then(response => {
+      setRepos(response.data?.search.repos.map(({ repo }): IRepo => repo) || []);
+    });
+  };
+
+  const loadMore = () => {
+    getSearchedRepos({ 
+      variables: { query: searchString, before: endCursor },
+    }).then(response => {
+      const fetchedRepos = response.data?.search.repos.map(({ repo }): IRepo => repo) || []
+      setRepos([...repos, ...fetchedRepos]);
+    });
   };
 
   return {
-    repos,
-    onSearch,
     isLoading: searchString.length && loading,
     isSearchEmpty: searchString.length === 0,
-    isNoResults: searchString.length && !loading && repos && repos.length === 0
+    isNoResults: searchString.length && !loading && repos && repos.length === 0,
+    repos,
+    hasNextPage,
+    onSearch,
+    loadMore,
   };
 };
