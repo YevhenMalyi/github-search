@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Rating } from '@mui/material';
 
 interface ICustomRatingProps {
