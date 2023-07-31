@@ -7,7 +7,9 @@ interface IFavoriteButtonProps {
   isFavorite: boolean,
 }
 
-export const FavoriteButton = ({ handleClick, isFavorite}: IFavoriteButtonProps) => {
+export const FavoriteButton = (
+  { handleClick, isFavorite}: IFavoriteButtonProps
+) => {
   return (
     <Button 
       size="small" 

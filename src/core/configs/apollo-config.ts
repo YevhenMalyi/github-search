@@ -5,16 +5,17 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+import { environment } from 'env';
+
 const httpLink = createHttpLink({
   uri: 'https://api.github.com/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = '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';
   return {
     headers: {
       ...headers,
-      authorization: `Bearer ${ token }`
+      authorization: `Bearer ${ environment.APOLLO_TOKEN }`
     }
   };
 });

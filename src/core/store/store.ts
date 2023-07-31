@@ -2,9 +2,9 @@ import { IRepo } from 'features/repository/types';
 import { create } from 'zustand';
 
 export enum ActionTypes {
-  ADD = 'favorites/add',
-  SET_RATING = 'favorites/set_rating',
-  REMOVE = 'favorites/remove',
+  ADD = 'add',
+  SET_RATING = 'set_rating',
+  REMOVE = 'remove',
 };
 
 type State = {

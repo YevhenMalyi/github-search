@@ -30,7 +30,7 @@ export const FavoritesList = () => {
   };
 
   return (
-    <div className="app-repository-list">
+    <div className="app-favorites-list">
       { favorites.length 
         ? getList()
         : <h2>Your list of favorite repositories is empty</h2>
